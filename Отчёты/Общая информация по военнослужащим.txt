@@ -1,0 +1,14 @@
+select st.full_name as "Имя" ,st.conscript_date as "Дата начала службы", 
+
+  AGE(current_Date, st.conscript_date),
+  DATE_PART('year', AGE(current_Date, st.conscript_date))||'.'||
+  DATE_PART('month', AGE(current_Date, st.conscript_date)) ||'.'||
+  DATE_PART('day', AGE(current_Date, st.conscript_date)) AS выслуга,
+  sl.percent||'%' as "процент за выслугу",
+	ps.name as "Должность",rt.id as "Тарифный план",rt."Rate" as "Тариф",rnk.name as "Звание",rnk.award as "Премия за звание",
+	(rt."Rate"+rnk.award)*(sl.percent/100+1) as "Оклад"
+from staff st
+left join ref_positions ps on ( st.position_id=ps.id)
+left join ref_rates rt on ( ps.contract_service_rate_id=rt.id)
+left join ref_ranks rnk on ( st.rank_id=rnk.id)
+join ref_service_len sl on (DATE_PART('year', AGE(current_Date, st.conscript_date))+1 between sl.lower_bound and sl.upper_bound)

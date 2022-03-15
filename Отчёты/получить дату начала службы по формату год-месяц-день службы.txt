@@ -1,0 +1,9 @@
+with date_t as
+(select 7 as year,
+ 11 as month,
+ 1 as day)
+select  
+		(((to_Date('01.01.2022','DD.MM.YYYY') - interval '1 day' * t.day)
+			- interval '1 month' * t.month)
+			 - interval '1 year' * t.year)::DATE
+from date_t t

@@ -1,0 +1,30 @@
+--find data overlap in staff service
+SELECT t1.id,t2.id,t1.end_date-t1.start_date as first_period,
+	   t2.end_date-t2.start_date as second_period,
+	   t1.start_date,t1.end_date,t2.start_date,t2.end_date,
+	  
+	   t1.serv_t_id,rs1.percent,t2.serv_t_id,rs2.percent,
+	  -- ((t1.end_date-t1.start_date)*(rs1.percent/100))+((t2.end_date-t2.start_date)*(rs2.percent/100))
+	   --/(t1.end_date-t1.start_date)+(t2.end_date-t2.start_date)
+	   
+	   t1.end_date-t1.start_date,
+	   least(t1.start_date,t2.start_date),greatest(t1.end_date,t2.end_date),
+	   	((t1.end_date-t1.start_date)*(rs1.percent*0.01) 
+		+ -- количество дней в первом периоде умноженное на коефициент
+			(t2.end_date-t2.start_date)*(rs2.percent*0.01)-- количество дней во втором периоде умноженное на коефициент
+			-
+		(upper(daterange(t1.start_date,t1.end_date, '[]') -- количество дней на пересечении
+       		* daterange(t2.start_date, t2.end_date, '[]'))
+			-
+		lower(daterange(t1.start_date,t1.end_date, '[]') 
+       		* daterange(t2.start_date, t2.end_date, '[]'))))::INTEGER	
+			as intersection
+FROM staff_serv_per t1 
+join staff_serv_per t2 on (t1.staff_id=t2.staff_id and t1.id!=t2.id and t1.serv_t_id!=t2.serv_t_id
+						   and (t1.start_date between t2.start_date and t2.end_date
+						  		or t1.end_date between t2.start_date and t2.end_date)
+						  -- and t2.serv_t_id<t1.serv_t_id
+						  )
+join ref_service_type rs1 on (t1.serv_t_id=rs1.id)		
+join ref_service_type rs2 on (t2.serv_t_id=rs2.id)	
+WHERE  t1.staff_id=1

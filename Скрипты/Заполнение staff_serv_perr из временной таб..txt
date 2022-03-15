@@ -1,0 +1,175 @@
+insert into staff_serv_per
+select * from (
+select  nextval('gen_seq'),s.id,
+		"Дата І призову" as start_date, "Дата І звільнення" as end_date,
+		false as active,1 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)
+union all
+select  nextval('gen_seq'),s.id,
+		"Дата ІІ призову" as start_date , "Дата ІІ звільнення"  as end_date, 
+			false as active,1 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)
+		union all
+select  nextval('gen_seq'),s.id,
+    	"Дата ІІІ призову" as start_date ,"Дата ІІІ звільнення" as end_date,
+			false as active,1 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)
+		union all
+select  nextval('gen_seq'),s.id,
+    	"місяць за три Пільгова початок" as start_date ,"Пільгова кінець"  as end_date, 
+			false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)
+		union all
+select  nextval('gen_seq'),s.id,
+    	"Пільгова початок"  as start_date,"Пільгова кінець__1" as end_date,
+	false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)
+
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__1" as start_date ,"Пільгова кінець__2" as end_date ,
+	false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__2" as start_date ,"Пільгова кінець__3"  as end_date,
+	false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__3" as start_date ,"Пільгова кінець__4"  as end_date,
+			false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__4" as start_date ,"Пільгова кінець__5"  as end_date,
+			false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__5" as start_date ,"Пільгова кінець__6"  as end_date,
+			false as active, 3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__6" as start_date ,"Пільгова кінець__7"  as end_date,
+		false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__7" as start_date ,"Пільгова кінець__8"  as end_date,
+		false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select nextval('gen_seq'), s.id,
+    	
+    	"Пільгова початок__8" as start_date ,"Пільгова кінець__9"  as end_date,
+		false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)		
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__9"  as start_date,"Пільгова кінець__10"  as end_date,
+	false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)			
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__10" as start_date ,"Пільгова кінець__11"  as end_date,
+		false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)			
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__11"  as start_date,"Пільгова кінець__12" as end_date , 
+		false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)	
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__12"  as start_date,"Пільгова кінець__13"  as end_date, 
+		false as active,3 as serv_t_id,now()::timestamp
+    	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)	
+		union all
+select  nextval('gen_seq'),s.id,	
+    	"місяць за півтора Пільгова почато"  as start_date,"Пільгова кінець__14" as end_date ,
+		false as active,7 as serv_t_id,now()::timestamp	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)	
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок__13"  as start_date,"Пільгова кінець__15"  as end_date,
+		false as active,7 as serv_t_id,now()::timestamp	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)	
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"місяць за два Пільгова початок" as start_date ,"Пільгова кінець__16"  as end_date, 
+		false as active,6 as serv_t_id,now()::timestamp	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)	
+		union all
+select  nextval('gen_seq'),s.id,
+    	
+    	"місяць за 40 днів Пільгова початок" as start_date ,"Пільгова кінець__17" as end_date ,
+		false as active,4 as serv_t_id,now()::timestamp	
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)	
+		union all
+select  
+		nextval('gen_seq'),s.id,
+    	
+    	"Пільгова початок (навчання) місяць"  as start_date ,
+		"Пільгова кінець (навчання)"  as end_date, 
+		false as active,5  as serv_t_id,
+		now()::timestamp	
+		
+
+from import_staff_and_peiod st
+join staff s on (st."Прізвище та ініціали"=s.full_name)
+where "Прізвище та ініціали" is not null
+	)a
+	where a.start_date is not null

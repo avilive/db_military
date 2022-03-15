@@ -1,0 +1,34 @@
+select a.id,a.full_name,
+a.year+
+((a.month +(a.day-a.day::INTEGER%'30'::INTEGER)/30)
+
+-(a.month +(a.day-a.day::INTEGER%'30'::INTEGER)/30)::INTEGER%'12'::INTEGER)/12 as year,
+	  
+	   (a.month +(a.day-a.day::INTEGER%'30'::INTEGER)/30)::INTEGER%'12'::INTEGER as  month, 
+	   a.day::INTEGER%'30'::INTEGER as  day
+from(
+	select st.id,st.full_name,
+		sum(
+			   DATE_PART('year', AGE(spp.end_date,spp.start_date)*(rst.percent*0.01)
+						)
+		 ) 
+		as year
+		   ,
+		 sum(
+			   DATE_PART('month', AGE(spp.end_date,spp.start_date)*(rst.percent*0.01)
+						)
+		 ) 
+		as month
+		   ,
+		sum(
+			   DATE_PART('day',  AGE(spp.end_date,spp.start_date)*(rst.percent*0.01)
+						)
+			 )
+			as day
+	from staff st
+	join staff_serv_per spp on (st.id=spp.staff_id)
+	join ref_service_type rst on (spp.serv_t_id=rst.id)
+	where st.id=1
+	group by  st.id,st.full_name
+) a
+
